@@ -1,5 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 const errorHandlerMiddleware = (err, req, res, next) => {
+  console.log(err);
+  
   let customError = {
     // set default
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
@@ -14,6 +16,10 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.msg = Object.values(err.errors)
       .map((item) => item.message)
       .join(',')
+    customError.statusCode = 400
+  }
+  if (err.email) {
+    customError.msg = `duplicate`,
     customError.statusCode = 400
   }
   if (err.code && err.code === 11000) {
