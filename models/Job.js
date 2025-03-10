@@ -1,3 +1,4 @@
+const { string } = require('joi')
 const mongoose = require('mongoose')
 
 const JobSchema = new mongoose.Schema(
@@ -18,7 +19,7 @@ const JobSchema = new mongoose.Schema(
       default: 'pending',
     },
     createdBy: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'Please provide user'],
     },
